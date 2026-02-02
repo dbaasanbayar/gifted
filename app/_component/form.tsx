@@ -1,3 +1,4 @@
+"use client"
 import { Button } from "@/components/ui/button";
 import { AppScreen, ChildProfile } from "@/lib/types";
 import { Label } from "@/components/ui/label";
@@ -9,6 +10,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useState } from "react";
+import { Input } from "@/components/ui/input";
 
 interface FormProps {
   setScreen: (screen: AppScreen) => void;
@@ -20,26 +23,33 @@ const interestsLists = ["Space", "Animals", "Sports", "Drawing"];
 const genderOptions = ["Girl", "Boy", "Prefer not to say"];
 
 export const Form = ({ setScreen, setProfile, profile }: FormProps) => {
-  const toggleInterest = (interest: string) => {
-    setProfile((prev) => {
-      const exists = prev.interests.includes(interest);
+  const [customInterest, setCustomInterest]= useState("");
+  const [allInterests, setAllInterests] = useState(interestsLists);
+  const addInterest = (interest: string) => {
+    const value = interest.trim();
+    if (!value) return;
 
-      return {
+    setAllInterests((prev) =>
+      prev.includes(value) ? prev : [...prev, value]
+    );
+  
+    if (!profile.interests.includes(value)) {
+      setProfile((prev) => ({
         ...prev,
-        interests: exists
-          ? prev.interests.filter((i) => i !== interest)
-          : [...prev.interests, interest],
-      };
-    });
+        interests: [...prev.interests, value],
+      }));
+    }
+  
+    setCustomInterest("");
   };
-  console.log(profile, "utga awah");
+
   return (
     <div className="flex flex-col items-center p-10 h-screen">
-      <h1>Child's Profile</h1>
+      <h1 className="font-bold">Child's Profile</h1>
       <p>Help us understand what makes your child special.</p>
       <div className="flex gap-10 p-10">
         <div className="flex flex-col">
-          <Label>Gender(optinal)</Label>
+          <Label className="font-bold">Gender(optinal)</Label>
           <Select
             onValueChange={(value) =>
               setProfile((prev) => ({ ...prev, gender: value }))
@@ -60,7 +70,7 @@ export const Form = ({ setScreen, setProfile, profile }: FormProps) => {
           </Select>
         </div>
         <div className="flex flex-col">
-          <Label>Age Range</Label>
+          <Label className="font-bold">Age Range</Label>
           <Select
             onValueChange={(value) =>
               setProfile((prev) => ({ ...prev, age: value }))
@@ -81,7 +91,7 @@ export const Form = ({ setScreen, setProfile, profile }: FormProps) => {
           </Select>
         </div>
         <div className="flex flex-col">
-          <Label>Budget Limit</Label>
+          <Label className="font-bold">Budget Limit</Label>
           <Select
             onValueChange={(value) =>
               setProfile((prev) => ({ ...prev, budget: value }))
@@ -103,27 +113,35 @@ export const Form = ({ setScreen, setProfile, profile }: FormProps) => {
         </div>
       </div>
       <div className="p-10 flex flex-col">
-        <Label>
+        <Label className="font-bold">
           Interest<span>(choose many)</span>
         </Label>
-        <div className="flex gap-4">
-          {interestsLists.map((interest) => {
+        <div className="grid grid-cols-3 gap-4">
+          {allInterests.map((interest) => {
             const selected = profile.interests.includes(interest);
             return (
               <Button
                 key={interest}
-                onClick={() => toggleInterest(interest)}
+                onClick={() => addInterest(interest)}
                 variant={selected ? "default" : "outline"}
               >
                 {interest}
               </Button>
             );
           })}
-          <Button variant="secondary">+ Add other</Button>
+          <div className="flex gap-2">
+  <Input
+    value={customInterest}
+    onChange={(e) => setCustomInterest(e.target.value)}
+    placeholder="Other interest"
+    className="border rounded px-2 py-1"
+  />
+  <Button onClick={() => addInterest(customInterest)}>Add</Button>
+</div>
         </div>
       </div>
       <div className="p-10 flex flex-col">
-        <Label>Learning Focus</Label>
+        <Label className="font-bold">Learning Focus</Label>
         <div className="grid grid-cols-2 gap-4">
           <Button>Problem Solving</Button>
           <Button>Creativity</Button>

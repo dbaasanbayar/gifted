@@ -14,6 +14,7 @@ export default function Page() {
     budget: "",
     learningFocus: [],
   });
+ 
   const [results, setResults] = useState<GiftRecommendation[]>([]);
   const [savedGifts, setSavedGifts] = useState<GiftRecommendation[]>([]);
   const [loadingText, setLoadingText] = useState("Thinking...");
