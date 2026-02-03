@@ -18,7 +18,13 @@ export type GiftRecommendation = {
   id: string;
   name: string;
   skills: string[];
-  explanation: string;
-  priceRange: string;
-  imageUrl: string;
+  why: string;
+  activity: string;
+  price: string;
+  image: string;
+  onlineShops?: Array<{
+    name: string;
+    url: string;
+    note?: string;
+  }>;
 };
