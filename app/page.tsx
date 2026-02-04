@@ -5,7 +5,6 @@ import { Home } from "@/app/_component/home";
 import { Form } from "@/app/_component/form";
 import { Loading } from "@/app/_component/loading";
 import { Results } from "@/app/_component/results";
-import { createContext } from "vm";
 export default function Page() {
   const [screen, setScreen] = useState<AppScreen>(AppScreen.HOME);
   const [profile, setProfile] = useState<ChildProfile>({
@@ -15,7 +14,6 @@ export default function Page() {
     budget: "",
     learningFocus: [],
   });
-  // console.log({ profile });
   const [results, setResults] = useState<GiftRecommendation[]>([]);
   const [savedGifts, setSavedGifts] = useState<GiftRecommendation[]>([]);
   const [loadingText, setLoadingText] = useState("Thinking...");

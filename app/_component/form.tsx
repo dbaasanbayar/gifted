@@ -20,17 +20,32 @@ interface FormProps {
   handleRecommend: () => void;
 }
 const budgetOpions = ["20", "50", "100", "100+"];
-const interestsLists = ["Space", "Animals", "Sports", "Drawing", "Cars"];
+const interestsLists = [
+  "Space",
+  "Do not know",
+  "Animals",
+  "Sports",
+  "Drawing",
+  "Cars",
+  "Computer",
+];
 const genderOptions = ["Girl", "Boy", "Prefer not to say"];
+const ageOptions = [
+  "Early childhood (0-8)",
+  "Primary and School age (6-12)",
+  "Adolescence (10-19)",
+];
 const learningFocus = [
-  "Problem solving",
-  "Socail skills",
+  "Problem Solving",
   "Creativity",
-  "Science, Technology, Engineering and Maths",
-  "Physical Activity",
-  "Language",
   "Emotional Intelligence",
-  "Fine Motor Skills",
+  "Social Skills",
+  "Communication",
+  "Teamwork",
+  "STEM Skills",
+  "Physical Development",
+  "Decision-Making",
+  "Empathy",
 ];
 
 export const Form = ({
@@ -113,9 +128,9 @@ export const Form = ({
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                {Array.from({ length: 16 }, (_, i) => i + 1).map((year) => (
-                  <SelectItem key={year} value={year.toString()}>
-                    {year} {year === 1 ? "year" : "years"}
+                {ageOptions.map((age) => (
+                  <SelectItem key={age} value={age}>
+                    {age}
                   </SelectItem>
                 ))}
               </SelectGroup>
@@ -173,7 +188,7 @@ export const Form = ({
         </div>
       </div>
       <div className="flex flex-col space-y-2">
-        <Label className="font-bold">Learning Focus</Label>
+        <Label className="font-bold">Core skills to focus </Label>
         <div className="grid grid-cols-2 gap-4">
           {learningFocus.map((subject) => {
             const selected = profile.learningFocus.includes(subject);
