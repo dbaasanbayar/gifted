@@ -5,8 +5,9 @@ import { Home } from "@/app/_component/home";
 import { Form } from "@/app/_component/form";
 import { Loading } from "@/app/_component/loading";
 import { Results } from "@/app/_component/results";
+import { useNav } from "./context/screen-context";
 export default function Page() {
-  const [screen, setScreen] = useState<AppScreen>(AppScreen.HOME);
+  const {screen, setScreen} = useNav();
   const [profile, setProfile] = useState<ChildProfile>({
     age: "",
     gender: "",
@@ -53,7 +54,6 @@ export default function Page() {
   console.log({ results });
   return (
     <div className="min-h-screen">
-      {/* {screen === AppScreen.HOME && <Header setScreen={setScreen} />} */}
       {screen === AppScreen.HOME && <Home setScreen={setScreen} />}
       {screen === AppScreen.FORM && (
         <Form

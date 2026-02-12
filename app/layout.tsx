@@ -3,7 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "./_component/header";
 import { ClerkProvider } from "@clerk/nextjs";
-import { ScreenProvider } from "./context/screen-context";
+import { NavigationProvider } from "./context/screen-context";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,18 +28,19 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <ScreenProvider>
         <html lang="en">
           <body
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}
           >
+            <NavigationProvider
+            >
             <div className="bg-linear-to-br from-blue-50 via-purple-50 to-pink-50">
               <Header />
               {children}
             </div>
+            </NavigationProvider>
           </body>
         </html>
-      </ScreenProvider>
     </ClerkProvider>
   );
 }

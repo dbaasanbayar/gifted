@@ -84,6 +84,12 @@ export const Form = ({
     });
   };
 
+  const isFormComplete = 
+  profile.age && 
+  profile.budget && 
+  profile.interests.length > 0 &&
+  profile.learningFocus.length > 0; 
+
   return (
     <div className="min-h-screen w-full flex flex-col gap-5 px-20 py-5">
       <div className="flex items-center flex-col ">
@@ -205,7 +211,7 @@ export const Form = ({
         </div>
       </div>
       <div>
-        <Button onClick={handleRecommend}>Generate Gifts</Button>
+        <Button onClick={handleRecommend} disabled={!isFormComplete}>Generate Gifts</Button>
       </div>
     </div>
   );
