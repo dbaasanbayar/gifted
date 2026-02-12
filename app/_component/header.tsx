@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Bookmark } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { UserButton, SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
+// import { UserButton, SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
 import { useNav } from "../context/screen-context";
 import { AppScreen } from "@/lib/types";
 
@@ -36,12 +36,12 @@ export const Header = () => {
           Saved
         </Button>
         <div className="flex gap-2">
-          <SignedOut>
+          {/* <SignedOut>
             <SignInButton />
           </SignedOut>
           <SignedIn>
             <UserButton />
-          </SignedIn>
+          </SignedIn> */}
         </div>
       </div>
     </div>
