@@ -1,16 +1,13 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { AppScreen } from "@/lib/types";
-import { useUser } from "@clerk/nextjs";
 import { Brain, Heart, Rocket } from "lucide-react";
-import { SignInButton } from "@clerk/nextjs";
 
 interface HomeProps {
   setScreen: (screen: AppScreen) => void;
 }
 
 export const Home = ({ setScreen }: HomeProps) => {
-  const { isSignedIn } = useUser();
   return (
     <div className="min-h-screen flex flex-col items-center justify-start p-20">
       <div className="text-center mb-16">
@@ -26,7 +23,6 @@ export const Home = ({ setScreen }: HomeProps) => {
         {[
           {
             icon: Brain,
-            // Map the full tailwind classes here
             styles: "bg-sky-50 text-sky-600",
             title: "Develop Skills",
           },
@@ -60,11 +56,7 @@ export const Home = ({ setScreen }: HomeProps) => {
           </div>
         ))}
       </div>
-      {!isSignedIn ? (
-        <SignInButton mode="modal">
-          <Button>Start Recommendation →</Button>
-        </SignInButton>
-      ) : (
+      {(
         <Button onClick={() => setScreen(AppScreen.FORM)}>
           Start Recommendation →
         </Button>
