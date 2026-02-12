@@ -29,7 +29,7 @@ export default function RootLayout({
 }>) {
   const publishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
   return (
-    <ClerkProvider publishableKey={publishableKey}>
+    // <ClerkProvider publishableKey={publishableKey}>
         <html lang="en">
           <body
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}
@@ -43,6 +43,6 @@ export default function RootLayout({
             </NavigationProvider>
           </body>
         </html>
-    </ClerkProvider>
+    // {/* </ClerkProvider> */}
   );
 }
