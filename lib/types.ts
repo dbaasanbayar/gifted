@@ -28,3 +28,4 @@ export type GiftRecommendation = {
     note?: string;
   }>;
 };
+
