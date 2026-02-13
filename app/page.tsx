@@ -50,8 +50,8 @@ export default function Page() {
     });
   };
 
-  console.log({ profile });
-  console.log({ results });
+  // console.log({ profile });
+  // console.log({ results });
   return (
     <div className="min-h-screen">
       {screen === AppScreen.HOME && <Home setScreen={setScreen} />}
